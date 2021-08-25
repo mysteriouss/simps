@@ -17,7 +17,7 @@ use Swoole\Server;
 
 class MqttServer
 {
-    protected $_server;
+    public $_server;
 
     protected $_config;
 
@@ -39,6 +39,9 @@ class MqttServer
             [$class, $func] = $callbackItem;
             $this->_server->on($eventKey, [$class, $func]);
         }
+    }
+
+    public function start(){
         $this->_server->start();
     }
 
