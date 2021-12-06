@@ -13,6 +13,7 @@ namespace Simps\Server;
 use Simps\Application;
 use Simps\Listener;
 use Simps\Route;
+use Simps\Context;
 use Swoole\WebSocket\Server;
 
 class WebSocket
