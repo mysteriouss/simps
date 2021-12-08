@@ -40,6 +40,7 @@ class WebSocket
         }
 
         $this->_server->on('workerStart', [$this, 'onWorkerStart']);
+        $this->_server->on('workerExit', [$this, 'onWorkerExit']);
         $this->_server->on('request', [$this, 'onRequest']);
 
         foreach ($wsConfig['callbacks'] as $eventKey => $callbackItem) {
@@ -75,6 +76,11 @@ class WebSocket
     {
         $this->_route = Route::getInstance();
         Listener::getInstance()->listen('workerStart', $server, $workerId);
+    }
+    public function onWorkerExit(\Swoole\Server $server, int $workerId)
+    {
+        $this->_route = Route::getInstance();
+        Listener::getInstance()->listen('workerExit', $server, $workerId);
     }
 
     public function onRequest(\Swoole\Http\Request $request, \Swoole\Http\Response $response)
